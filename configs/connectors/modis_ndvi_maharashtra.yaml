@@ -1,0 +1,10 @@
+name: modis_ndvi_maharashtra
+type: download
+description: MODIS Vegetation Indices (16-Day L3 Global 250m) for Maharashtra crop health monitoring.
+domain: earth_observation
+schedule: "0 3 * * 1"
+url: "https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.061/2023.10.01/MOD13Q1.A2023274.h24v06.061.2023289194145.hdf"
+metadata:
+  license: "Public Domain (NASA)"
+  source_agency: "NASA LP DAAC"
+  update_frequency: "16-Day"

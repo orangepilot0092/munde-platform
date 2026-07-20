@@ -1,0 +1,15 @@
+name: weather_open_meteo_maharashtra
+type: rest
+description: High-resolution historical and forecast weather data for Maharashtra districts via Open-Meteo.
+domain: meteorology
+status: connected
+schedule: "0 2 * * *"
+url: "https://archive-api.open-meteo.com/v1/archive"
+params:
+  latitude: "19.0"
+  longitude: "75.5"
+  daily: "temperature_2m_max,temperature_2m_min,precipitation_sum"
+  timezone: "Asia/Kolkata"
+metadata:
+  source_agency: "Open-Meteo"
+  license: "CC-BY-4.0"

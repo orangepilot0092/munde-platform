@@ -1,0 +1,35 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1' # Weekly Monday scan
+
+jobs:
+  dependency-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry export -f requirements.txt --output requirements.txt --without-hashes
+          pip install pip-audit
+          
+      - name: Run pip-audit
+        run: pip-audit -r requirements.txt --format json > audit-results.json || true
+        
+      - name: Upload audit results
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit-report
+          path: audit-results.json

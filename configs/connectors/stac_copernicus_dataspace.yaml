@@ -1,0 +1,12 @@
+name: stac_copernicus_dataspace
+type: stac
+description: Sentinel-2 L2A via Copernicus Data Space.
+domain: satellite
+status: connected
+catalog_url: "https://catalogue.dataspace.copernicus.eu/stac"
+collections: ["SENTINEL2_L2A"]
+bbox: [72.5, 15.5, 81.0, 22.5]
+datetime_range: "2023-01-01/2023-01-31"
+limit: 5
+metadata:
+  source_agency: "ESA"

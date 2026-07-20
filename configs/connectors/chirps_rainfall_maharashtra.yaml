@@ -1,0 +1,8 @@
+name: chirps_rainfall_maharashtra
+type: download
+description: CHIRPS daily rainfall GeoTIFF (Sample file).
+domain: rainfall
+status: connected
+url: "https://data.chc.ucsb.edu/products/CHIRPS-2.0/global_daily/tifs/p05/2023/chirps-v2.0.2023.01.01.tif.gz"
+metadata:
+  source_agency: "UCSB Climate Hazards Center"

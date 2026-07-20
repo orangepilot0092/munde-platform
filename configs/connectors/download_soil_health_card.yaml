@@ -1,0 +1,9 @@
+name: download_soil_health_card
+type: download
+description: Soil Health Card scheme macro-nutrient and micro-nutrient status by district.
+domain: agriculture
+status: file_based
+url: "https://soilhealth.dac.gov.in/reports/StateWiseMacroMicroNutrients.csv"
+metadata:
+  source_agency: "MoA&FW"
+  license: "Public Domain"

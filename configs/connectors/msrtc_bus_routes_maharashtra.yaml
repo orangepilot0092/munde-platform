@@ -1,0 +1,14 @@
+name: msrtc_bus_routes_maharashtra
+type: manual
+description: Maharashtra State Road Transport Corporation active routes and schedules.
+domain: transport
+schedule: 0 1 * * *
+url: https://msrtc.gov.in/
+params:
+  format: json
+metadata:
+  license: Public Domain
+  source_agency: MSRTC, Govt of Maharashtra
+  update_frequency: Daily
+status: ready
+blocked_reason: No public data feed available

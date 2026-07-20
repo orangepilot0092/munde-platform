@@ -1,0 +1,8 @@
+name: download_gadm
+type: download
+description: GADM administrative boundaries for India.
+domain: gis
+status: connected
+url: "https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_IND_1.json.zip"
+metadata:
+  source_agency: "UC Davis"

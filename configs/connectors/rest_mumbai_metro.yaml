@@ -1,0 +1,7 @@
+name: rest_mumbai_metro
+type: rest
+domain: transport
+status: ready
+description: Mumbai Metro ridership and schedules.
+url: https://api.mahametro.org/api/v1/ridership
+blocked_reason: Awaiting Maha-Metro open data API release.

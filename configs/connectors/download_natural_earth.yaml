@@ -1,0 +1,6 @@
+name: download_natural_earth
+type: download
+domain: gis
+status: file_based
+description: Natural Earth cultural and physical boundaries.
+url: https://naciscdn.org/naturalearth/110m/cultural/ne_110m_admin_0_countries.zip

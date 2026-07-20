@@ -1,0 +1,15 @@
+name: stac_mpc_sentinel2_maharashtra
+type: stac
+description: Cloud-optimized Sentinel-2 Level-2A surface reflectance imagery for Maharashtra via Microsoft Planetary Computer.
+domain: earth_observation
+schedule: "0 4 * * *"
+catalog_url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+collections:
+  - "sentinel-2-l2a"
+bbox: [72.5, 15.5, 81.0, 22.5]
+datetime_range: "2023-01-01T00:00:00Z/2023-12-31T23:59:59Z"
+limit: 100
+metadata:
+  license: "Sentinel-2 Data Terms of Use"
+  source_agency: "ESA / Microsoft"
+  update_frequency: "5-Day Revisit"

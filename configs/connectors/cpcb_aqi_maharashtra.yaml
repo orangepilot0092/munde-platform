@@ -1,0 +1,19 @@
+name: cpcb_aqi_maharashtra
+type: rest
+description: Real-time Air Quality Index (AQI) from CPCB stations in Maharashtra.
+domain: environment
+schedule: '*/30 * * * *'
+url: https://api.data.gov.in/resource/81371c80-8cd6-4422-9e52-a38e72b265d1
+headers:
+  api-key: ${DATA_GOV_IN_API_KEY}
+params:
+  format: json
+  filters[state]: Maharashtra
+  limit: '100'
+metadata:
+  license: OGD License India
+  source_agency: Central Pollution Control Board (CPCB)
+  update_frequency: Hourly
+blocked_reason: Requires data.gov.in API Key
+auth_required: true
+status: ready

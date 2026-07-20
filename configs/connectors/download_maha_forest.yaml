@@ -1,0 +1,6 @@
+name: download_maha_forest
+type: download
+domain: environment
+status: file_based
+description: Maharashtra Forest Department GIS layers.
+url: https://forest.maharashtra.gov.in/gis/forest_cover.zip

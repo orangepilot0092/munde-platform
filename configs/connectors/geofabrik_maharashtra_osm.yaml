@@ -1,0 +1,10 @@
+name: geofabrik_maharashtra_osm
+type: download
+description: OpenStreetMap road and building network for Maharashtra from Geofabrik.
+domain: gis
+schedule: "0 0 1 * *"
+url: "https://download.geofabrik.de/asia/india/maharashtra-latest.osm.pbf"
+metadata:
+  license: "ODbL"
+  source_agency: "OpenStreetMap / Geofabrik"
+  update_frequency: "Daily"

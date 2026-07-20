@@ -1,0 +1,6 @@
+name: rest_ndma
+type: rest
+domain: disaster
+status: connected
+description: NDMA disaster alerts and guidelines.
+url: https://ndma.gov.in/api/v1/alerts

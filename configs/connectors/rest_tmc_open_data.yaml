@@ -1,0 +1,7 @@
+name: rest_tmc_open_data
+type: rest
+domain: urban
+status: ready
+description: Thane Municipal Corporation data.
+url: https://tmc.gov.in/api/open-data
+blocked_reason: Portal exists, API access pending.

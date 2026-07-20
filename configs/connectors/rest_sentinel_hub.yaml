@@ -1,0 +1,7 @@
+name: rest_sentinel_hub
+type: rest
+domain: satellite
+status: ready
+description: Sentinel Hub API for EO data.
+url: https://services.sentinel-hub.com/api/v1/catalog/1.0.0/
+blocked_reason: Requires commercial API subscription key.

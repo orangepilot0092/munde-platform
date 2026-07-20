@@ -1,0 +1,7 @@
+name: rest_digilocker
+type: rest
+domain: identity
+status: blocked
+description: DigiLocker document issuance and verification.
+url: https://api.digilocker.gov.in/v1/issuer
+blocked_reason: Requires MeitY approval and OAuth citizen consent.

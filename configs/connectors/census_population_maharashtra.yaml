@@ -1,0 +1,10 @@
+name: census_population_maharashtra
+type: download
+description: Decadal population and demographic statistics for Maharashtra districts.
+domain: demography
+schedule: "0 0 1 1 *"
+url: "https://censusindia.gov.in/nada/index.php/catalog/405/download/565/PC_2011_Maharashtra.csv"
+metadata:
+  license: "Public Domain"
+  source_agency: "Office of the Registrar General & Census Commissioner, India"
+  update_frequency: "Decadal"

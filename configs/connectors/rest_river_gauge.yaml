@@ -1,0 +1,7 @@
+name: rest_river_gauge
+type: rest
+domain: water
+status: blocked
+description: Real-time river gauge levels.
+url: http://india-wris.nrsc.gov.in/wrpdata/services/river-gauge
+blocked_reason: "Requires NIC/BSNL Internal Government Network or VPN"

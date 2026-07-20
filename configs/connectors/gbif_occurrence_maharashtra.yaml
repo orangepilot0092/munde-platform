@@ -1,0 +1,16 @@
+name: gbif_occurrence_maharashtra
+type: rest
+description: GBIF species occurrence records filtered for Maharashtra bounding box.
+domain: biodiversity
+schedule: "0 4 * * 0"
+url: "https://api.gbif.org/v1/occurrence/search"
+params:
+  decimalLatitude: "15.5,22.5"
+  decimalLongitude: "72.5,81.0"
+  hasCoordinate: "true"
+  limit: "100"
+pagination_key: "offset"
+metadata:
+  license: "CC0 1.0"
+  source_agency: "Global Biodiversity Information Facility"
+  update_frequency: "Weekly"

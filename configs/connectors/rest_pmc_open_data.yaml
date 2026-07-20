@@ -1,0 +1,7 @@
+name: rest_pmc_open_data
+type: rest
+domain: urban
+status: ready
+description: Pune Municipal Corporation open data.
+url: https://data.punecorporation.org/api/v1/datasets
+blocked_reason: Awaiting PMC IT cell API credentials.

@@ -1,0 +1,6 @@
+name: rest_sdma
+type: rest
+domain: disaster
+status: connected
+description: State Disaster Management Authority incidents.
+url: https://sdma.maharashtra.gov.in/api/incidents

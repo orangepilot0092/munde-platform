@@ -1,0 +1,7 @@
+name: rest_crop_survey
+type: rest
+domain: agriculture
+status: ready
+description: Detailed crop cutting experiments (CCE).
+url: https://agri.maharashtra.gov.in/api/crop-survey
+blocked_reason: Requires internal department API key.

@@ -1,0 +1,7 @@
+name: ogc_bhuvan
+type: rest
+domain: gis
+status: ready
+description: ISRO Bhuvan WMS/WFS services.
+url: https://bhuvan-ras1.nrsc.gov.in/cgi-bin/wms?
+blocked_reason: Requires Bhuvan API key registration.

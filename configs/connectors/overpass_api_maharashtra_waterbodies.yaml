@@ -1,0 +1,13 @@
+name: overpass_api_maharashtra_waterbodies
+type: rest
+description: Extracts major water bodies in Maharashtra via Overpass API.
+domain: gis
+schedule: "0 1 * * 0"
+url: "https://overpass-api.de/api/interpreter"
+method: "POST"
+params:
+  data: "[out:json];area['name'='Maharashtra']->.searchArea;(way['natural'='water'](area.searchArea);relation['natural'='water'](area.searchArea););out body;>;out skel qt;"
+metadata:
+  license: "ODbL"
+  source_agency: "OpenStreetMap"
+  update_frequency: "Weekly"

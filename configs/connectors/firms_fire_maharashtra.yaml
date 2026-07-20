@@ -1,0 +1,17 @@
+name: firms_fire_maharashtra
+type: rest
+description: Active fire detections (VIIRS/SUOMI NPP) over Maharashtra from NASA FIRMS.
+domain: environment
+schedule: 0 */4 * * *
+url: https://firms.modaps.eosdis.nasa.gov/api/area/csv/FIRE_VIIRS_SNPP_NRT
+params:
+  MAP_KEY: ${NASA_FIRMS_MAP_KEY}
+  country: IND
+  area: 72.5,15.5,81.0,22.5
+metadata:
+  license: Public Domain
+  source_agency: NASA LANCE FIRMS
+  update_frequency: Every 4 Hours
+auth_required: true
+status: ready
+blocked_reason: Requires NASA FIRMS MAP_KEY

@@ -1,0 +1,10 @@
+name: rest_pmkisan
+type: rest
+description: PM-KISAN beneficiary status and fund transfer records.
+domain: agriculture
+status: ready
+blocked_reason: "Requires secure NIC authentication and OTP-based consent framework."
+url: "https://pmkisan.gov.in/api/beneficiary-status"
+metadata:
+  source_agency: "MoA&FW"
+  license: "Restricted"

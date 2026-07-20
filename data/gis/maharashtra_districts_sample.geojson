@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Pune", "type": "District" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.7, 18.4], [74.1, 18.4], [74.1, 18.9], [73.7, 18.9], [73.7, 18.4]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Mumbai", "type": "District" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.7, 18.9], [72.9, 18.9], [72.9, 19.2], [72.7, 19.2], [72.7, 18.9]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Nashik", "type": "District" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.6, 19.8], [74.0, 19.8], [74.0, 20.2], [73.6, 20.2], [73.6, 19.8]]]
+      }
+    }
+  ]
+}

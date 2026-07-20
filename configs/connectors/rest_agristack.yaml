@@ -1,0 +1,10 @@
+name: rest_agristack
+type: rest
+description: Digital Agriculture Mission (AgriStack) farmer registry and land parcel data.
+domain: agriculture
+status: ready
+blocked_reason: "Awaiting MoU and secure API gateway access from Ministry of Agriculture & Farmers Welfare."
+url: "https://agristack.gov.in/api/v1/farmer-registry"
+metadata:
+  source_agency: "MoA&FW / State Govts"
+  license: "Restricted / DPDP Act Protected"

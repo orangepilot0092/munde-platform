@@ -1,0 +1,17 @@
+name: nasa_power_maharashtra
+type: rest
+description: Daily historical weather data for Maharashtra districts from NASA POWER API.
+domain: meteorology
+status: connected
+url: "https://power.larc.nasa.gov/api/temporal/daily/point"
+params:
+  parameters: "PRECTOTCORR,T2M_MAX,T2M_MIN"
+  community: "AG"
+  longitude: "75.5"
+  latitude: "19.0"
+  start: "20230101"
+  end: "20230105"
+  format: "JSON"
+metadata:
+  source_agency: "NASA"
+  license: "Public Domain"

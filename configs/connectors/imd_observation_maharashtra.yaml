@@ -1,0 +1,15 @@
+name: imd_observation_maharashtra
+type: rest
+description: Real-time and historical weather observations from IMD stations in Maharashtra.
+domain: weather
+schedule: "0 */3 * * *"
+url: "https://mausam.imd.gov.in/imd_latest/contents/pdf/observations.pdf" # Placeholder for actual API endpoint
+headers:
+  api-key: "${IMD_API_KEY}"
+params:
+  state: "Maharashtra"
+  format: "json"
+metadata:
+  license: "Government of India Open Data"
+  source_agency: "India Meteorological Department"
+  update_frequency: "3-Hourly"

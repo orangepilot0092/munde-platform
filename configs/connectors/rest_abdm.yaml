@@ -1,0 +1,7 @@
+name: rest_abdm
+type: rest
+domain: health
+status: blocked
+description: Ayushman Bharat Digital Mission health records.
+url: https://abdm.gov.in/api/v1/health-records
+blocked_reason: Legally restricted under DPDP Act; requires citizen consent framework.

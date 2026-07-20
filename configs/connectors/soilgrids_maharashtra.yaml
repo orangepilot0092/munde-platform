@@ -1,0 +1,15 @@
+name: soilgrids_maharashtra
+type: rest
+description: Global soil property maps (clay, sand, SOC) queried for Maharashtra centroid.
+domain: agriculture
+schedule: "0 0 * * 0"
+url: "https://rest.isric.org/soilgrids/v2.0/properties/query"
+params:
+  lon: "75.5"
+  lat: "19.0"
+  property: "clay,sand,soc"
+  depth: "0-5cm,5-15cm"
+metadata:
+  license: "CC-BY-4.0"
+  source_agency: "ISRIC World Soil Information"
+  update_frequency: "Static"

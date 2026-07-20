@@ -1,0 +1,10 @@
+name: rbi_macroeconomic_maharashtra
+type: download
+description: Reserve Bank of India state-level macroeconomic and financial indicators.
+domain: economy
+schedule: "0 0 1 * *"
+url: "https://rbi.org.in/data/statistics/state_macro_indicators_maharashtra.csv"
+metadata:
+  license: "Public Domain"
+  source_agency: "Reserve Bank of India (RBI)"
+  update_frequency: "Monthly"

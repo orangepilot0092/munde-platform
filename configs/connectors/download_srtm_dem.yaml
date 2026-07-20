@@ -1,0 +1,9 @@
+name: download_srtm_dem
+type: download
+description: Shuttle Radar Topography Mission (SRTM) 30m Digital Elevation Model for Maharashtra.
+domain: terrain
+status: file_based
+url: "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/srtm_43_17.zip"
+metadata:
+  source_agency: "NASA / CGIAR"
+  license: "Public Domain"

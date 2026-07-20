@@ -1,0 +1,15 @@
+name: datagov_agriculture_maharashtra
+type: rest
+description: Agricultural statistics and crop production data from data.gov.in.
+domain: agriculture
+schedule: "0 2 * * *"
+url: "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070"
+headers:
+  api-key: "${DATA_GOV_IN_API_KEY}" # Will be resolved from environment
+params:
+  format: "json"
+  limit: "1000"
+metadata:
+  license: "Open Government Data (OGD) License India"
+  source_agency: "Ministry of Agriculture & Farmers Welfare"
+  update_frequency: "Monthly"

@@ -1,0 +1,6 @@
+name: download_aishe
+type: download
+domain: education
+status: file_based
+description: All India Survey on Higher Education (AISHE) data.
+url: https://aishe.gov.in/data/aishe_final_report.csv

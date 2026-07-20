@@ -1,0 +1,7 @@
+name: rest_ecourts
+type: rest
+domain: governance
+status: blocked
+description: eCourts case status and judgments.
+url: https://ecourts.gov.in/api/v1/cases
+blocked_reason: Scraping restricted; official API requires court approval.

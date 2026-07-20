@@ -1,0 +1,128 @@
+services:
+  postgres:
+    build:
+      context: ..
+      dockerfile: infra/db/Dockerfile
+    container_name: sahyadri-postgres
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-sahyadri} -d ${DB_NAME:-sahyadri_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_USER: ${DB_USER:-sahyadri}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-sahyadri_secret}
+      POSTGRES_DB: ${DB_NAME:-sahyadri_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+    networks:
+      - sahyadri-net
+  eval-worker:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    command: ["uv", "run", "arq", "src.core.services.eval_worker.WorkerSettings"]
+    environment:
+      - DATABASE_URL=postgresql://sahyadri:sahyadri_secret@postgres:5432/sahyadri_db
+      - REDIS_URL=redis://redis:6379/0
+      - OLLAMA_HOST=http://ai-node:11434
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import redis; r=redis.from_url('redis://redis:6379/0'); r.ping()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - sahyadri-net
+  minio:
+    image: minio/minio:latest
+    container_name: sahyadri-minio
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_secret}
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: sahyadri-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: sahyadri-app
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-sahyadri}:${DB_PASSWORD:-sahyadri_secret}@postgres:5432/${DB_NAME:-sahyadri_db}
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minio_secret}
+      AI_NODE_IP: ${AI_NODE_IP:-192.168.29.96}
+      LLM_MODEL: ${LLM_MODEL:-llama3.1:8b}
+    ports:
+      - "8001:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - sahyadri-net
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+volumes:
+  postgres_data:
+  minio_data:
+  redis_data:
+
+networks:
+  sahyadri-net:
+    driver: bridge
+
+

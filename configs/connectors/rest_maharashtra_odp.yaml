@@ -1,0 +1,7 @@
+name: rest_maharashtra_odp
+type: rest
+domain: governance
+status: blocked
+description: Maharashtra Open Data Portal catalog.
+url: https://data.maharashtra.gov.in/api/v1/datasets
+blocked_reason: "Requires NIC/BSNL Internal Government Network or VPN"

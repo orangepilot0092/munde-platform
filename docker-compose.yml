@@ -1,0 +1,47 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: sahyadri-db
+    environment:
+      POSTGRES_USER: sahyadri
+      POSTGRES_PASSWORD: sahyadri_dev_password
+      POSTGRES_DB: sahyadri_core
+    ports:
+      - "5432:5432"
+    volumes:
+      - sahyadri_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sahyadri"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: sahyadri-minio
+    environment:
+      MINIO_ROOT_USER: sahyadri_minio
+      MINIO_ROOT_PASSWORD: sahyadri_minio_password
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    volumes:
+      - /mnt/d/sahyadri-data/minio:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: sahyadri-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - sahyadri_redis_data:/data
+
+volumes:
+  sahyadri_db_data:
+  sahyadri_redis_data:

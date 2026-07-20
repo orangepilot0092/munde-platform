@@ -1,0 +1,10 @@
+name: mpcb_aqi_maharashtra
+type: rest
+description: Maharashtra Pollution Control Board (MPCB) air and water quality monitoring stations.
+domain: environment
+status: ready
+url: "https://mpcb.gov.in/api/v1/monitoring-stations"
+blocked_reason: "Requires MPCB API credentials or internal portal access."
+metadata:
+  source_agency: "Maharashtra Pollution Control Board (MPCB)"
+  license: "Public Domain"

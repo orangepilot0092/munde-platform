@@ -1,0 +1,7 @@
+name: rest_pcmc_open_data
+type: rest
+domain: urban
+status: ready
+description: Pimpri-Chinchwad Municipal Corporation data.
+url: https://pcmcindia.gov.in/api/open-data
+blocked_reason: Portal exists, API access pending.

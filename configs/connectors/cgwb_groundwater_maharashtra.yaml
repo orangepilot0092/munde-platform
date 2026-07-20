@@ -1,0 +1,10 @@
+name: cgwb_groundwater_maharashtra
+type: download
+description: Central Ground Water Board well level data for Maharashtra.
+domain: water
+schedule: "0 0 1 * *"
+url: "https://cgwb.gov.in/data/CGWB_Well_Levels_Maharashtra.csv"
+metadata:
+  license: "Public Domain"
+  source_agency: "Central Ground Water Board (CGWB)"
+  update_frequency: "Monthly"

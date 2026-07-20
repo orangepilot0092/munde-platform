@@ -1,0 +1,6 @@
+name: rest_relief_commissioner
+type: rest
+domain: disaster
+status: connected
+description: Relief Commissioner damage and relief distribution.
+url: https://relief.maharashtra.gov.in/api/damage-reports

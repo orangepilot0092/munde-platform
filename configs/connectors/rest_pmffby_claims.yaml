@@ -1,0 +1,11 @@
+name: rest_pmffby_claims
+type: rest
+description: Pradhan Mantri Fasal Bima Yojana (PMFBY) crop insurance claims and enrollment.
+domain: agriculture
+status: connected
+url: "https://pmfby.gov.in/api/v1/reports/state_claims"
+params:
+  state_code: "27"
+metadata:
+  source_agency: "MoA&FW"
+  license: "Public Domain"

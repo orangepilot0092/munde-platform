@@ -1,0 +1,7 @@
+name: rest_fertilizer_dashboard
+type: rest
+domain: agriculture
+status: ready
+description: Fertilizer sales and subsidy data.
+url: https://ifms.mfertilizer.gov.in/api/sales
+blocked_reason: Internal Govt network / VPN required.

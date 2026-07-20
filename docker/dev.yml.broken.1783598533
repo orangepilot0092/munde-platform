@@ -1,0 +1,96 @@
+services:
+  postgres:
+    build:
+      context: ..
+      dockerfile: infra/db/Dockerfile
+    container_name: sahyadri-postgres
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_USER: ${DB_USER:-sahyadri}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-sahyadri_secret}
+      POSTGRES_DB: ${DB_NAME:-sahyadri_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-sahyadri} -d ${DB_NAME:-sahyadri_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: sahyadri-minio
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_secret}
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: sahyadri-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    network_mode: host
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: sahyadri-app
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER:-sahyadri}
+      - DB_PASSWORD=${DB_PASSWORD:-sahyadri_secret}
+      - DB_NAME=${DB_NAME:-sahyadri_db}
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minio_secret}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OPENSEARCH_HOST=opensearch
+
+networks:
+  sahyadri-net:
+    driver: bridge
+    networks:
+      - sahyadri-net
+    networks:
+      - sahyadri-net
+    networks:
+      - sahyadri-net

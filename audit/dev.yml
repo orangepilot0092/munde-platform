@@ -1,0 +1,241 @@
+services:
+  postgres:
+    build:
+      context: ..
+      dockerfile: infra/db/Dockerfile
+    container_name: sahyadri-postgres
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_USER: ${DB_USER:-sahyadri}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-sahyadri_secret}
+      POSTGRES_DB: ${DB_NAME:-sahyadri_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-sahyadri} -d ${DB_NAME:-sahyadri_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: sahyadri-minio
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_secret}
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: sahyadri-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sahyadri-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: sahyadri-app
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER:-sahyadri}
+      - DB_PASSWORD=${DB_PASSWORD:-sahyadri_secret}
+      - DB_NAME=${DB_NAME:-sahyadri_db}
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minio_secret}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OPENSEARCH_HOST=opensearch
+    ports:
+      - "8001:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - sahyadri-net
+    volumes:
+      - ../src:/app/src
+      - ../tests:/app/tests
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: sahyadri-prometheus
+    restart: unless-stopped
+    volumes:
+      - ../infra/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    networks:
+      - sahyadri-net
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: sahyadri-grafana
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    networks:
+      - sahyadri-net
+    depends_on:
+      - prometheus
+
+  sahyadri-dagster-webserver:
+    image: python:3.11-slim
+    container_name: sahyadri-dagster-webserver
+    restart: unless-stopped
+    working_dir: /app
+    env_file:
+      - ../.env
+    environment:
+      - DAGSTER_HOME=/opt/dagster/dagster_home
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER:-sahyadri}
+      - DB_PASSWORD=${DB_PASSWORD:-sahyadri_secret}
+      - DB_NAME=${DB_NAME:-sahyadri_db}
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minio_secret}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    command: >
+      bash -c "apt-get update && apt-get install -y tesseract-ocr poppler-utils gcc &&
+               pip install poetry && 
+               poetry install && 
+               poetry run dagster-webserver -h 0.0.0.0 -p 3000 -f etl/sahyadri_etl/definitions.py"
+    volumes:
+      - ..:/app
+      - ../infra/dagster/dagster.yaml:/opt/dagster/dagster_home/dagster.yaml:ro
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sahyadri-net
+
+  sahyadri-dagster-daemon:
+    image: python:3.11-slim
+    container_name: sahyadri-dagster-daemon
+    restart: unless-stopped
+    working_dir: /app
+    env_file:
+      - ../.env
+    environment:
+      - DAGSTER_HOME=/opt/dagster/dagster_home
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER:-sahyadri}
+      - DB_PASSWORD=${DB_PASSWORD:-sahyadri_secret}
+      - DB_NAME=${DB_NAME:-sahyadri_db}
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minio_secret}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    command: >
+      bash -c "apt-get update && apt-get install -y tesseract-ocr poppler-utils gcc &&
+               pip install poetry && 
+               poetry install && 
+               poetry run dagster-daemon run"
+    volumes:
+      - ..:/app
+      - ../infra/dagster/dagster.yaml:/opt/dagster/dagster_home/dagster.yaml:ro
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sahyadri-net
+
+  opensearch:
+    image: opensearchproject/opensearch:2.11.0
+    container_name: sahyadri-opensearch
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    networks:
+      - sahyadri-net
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.11.0
+    container_name: sahyadri-opensearch-dashboards
+    environment:
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
+    ports:
+      - "5601:5601"
+    networks:
+      - sahyadri-net
+
+volumes:
+  postgres_data:
+  minio_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+  opensearch_data:
+
+networks:
+  sahyadri-net:
+    driver: bridge

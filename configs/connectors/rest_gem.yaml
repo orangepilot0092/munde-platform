@@ -1,0 +1,7 @@
+name: rest_gem
+type: rest
+domain: finance
+status: ready
+description: Government e-Marketplace procurement data.
+url: https://gem.gov.in/api/v1/contracts
+blocked_reason: Requires GeM organizational authentication.

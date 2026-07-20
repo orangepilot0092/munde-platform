@@ -1,0 +1,15 @@
+name: stac_copernicus_sentinel1_maharashtra
+type: stac
+description: Sentinel-1 Ground Range Detected (GRD) SAR imagery for Maharashtra (flood monitoring, all-weather).
+domain: earth_observation
+schedule: "0 6 * * *"
+catalog_url: "https://catalogue.dataspace.copernicus.eu/stac"
+collections:
+  - "SENTINEL-1"
+bbox: [72.5, 15.5, 81.0, 22.5]
+datetime_range: "2023-01-01T00:00:00Z/2023-12-31T23:59:59Z"
+limit: 100
+metadata:
+  license: "Copernicus Data License"
+  source_agency: "ESA / Copernicus"
+  update_frequency: "6-Day Revisit"

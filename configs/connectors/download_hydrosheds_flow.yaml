@@ -1,0 +1,6 @@
+name: download_hydrosheds_flow
+type: download
+domain: hydrology
+status: file_based
+description: HydroSHEDS flow direction rasters.
+url: https://data.hydrosheds.org/file/hydrosheds-v1-dir_15s.zip

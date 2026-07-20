@@ -1,0 +1,7 @@
+name: rest_india_code
+type: scraper
+domain: governance
+status: ready
+description: India Code legislative acts and bills.
+url: https://www.indiacode.nic.in/
+blocked_reason: Requires HTML scraping

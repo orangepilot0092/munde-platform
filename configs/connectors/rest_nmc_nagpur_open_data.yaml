@@ -1,0 +1,7 @@
+name: rest_nmc_nagpur_open_data
+type: rest
+domain: urban
+status: ready
+description: Nagpur Municipal Corporation data.
+url: https://nmcnagpur.org/api/open-data
+blocked_reason: Portal exists, API access pending.

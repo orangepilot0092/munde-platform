@@ -1,0 +1,68 @@
+# ==========================================
+# Virtual environments & Python
+# ==========================================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.installed.cfg
+
+# ==========================================
+# Environment & Secrets (NEVER COMMIT)
+# ==========================================
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# IDE & OS
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Testing & Linting caches
+# ==========================================
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ==========================================
+# Large Data Files (Keep locally, DO NOT commit)
+# ==========================================
+data/*.pbf
+data/*.zip
+data/*.shp
+data/*.dbf
+data/*.shx
+data/*.prj
+data/*.cpg
+data/geofabrik/
+data/natural_earth/
+data/osm/
+datasets/
+
+# ==========================================
+# Generated Documentation & Legacy Files
+# ==========================================
+site/
+poetry.lock
+requirements.txt
+python_modules.txt
+sahyadri_audit_bundle.tar.gz
+sahyadri_tree.txt
+main
+ync

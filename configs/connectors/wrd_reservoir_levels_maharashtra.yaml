@@ -1,0 +1,11 @@
+name: wrd_reservoir_levels_maharashtra
+type: rest
+description: Daily water levels in major Maharashtra reservoirs (WRD).
+domain: water
+schedule: "0 8 * * *"
+url: "https://wraindic.nic.in/api/v1/reservoirs/maharashtra"
+metadata:
+  license: "Public Domain"
+  source_agency: "Water Resources Department (WRD), Govt of Maharashtra"
+  update_frequency: "Daily"
+blocked_reason: "Requires NIC/BSNL Internal Government Network or VPN"

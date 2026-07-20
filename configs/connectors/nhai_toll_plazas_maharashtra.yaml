@@ -1,0 +1,15 @@
+name: nhai_toll_plazas_maharashtra
+type: scraper
+description: National Highways Authority of India toll plaza locations and traffic
+  data.
+domain: transport
+schedule: 0 4 * * *
+url: https://nhai.org/toll-plaza-data
+params:
+  state: Maharashtra
+metadata:
+  license: Public Domain
+  source_agency: NHAI / Ministry of Road Transport and Highways
+  update_frequency: Daily
+status: ready
+blocked_reason: Requires HTML scraping

@@ -1,0 +1,10 @@
+name: rest_cwc_flood_forecast
+type: rest
+description: Central Water Commission (CWC) real-time flood forecasting and river gauge levels.
+domain: water
+status: blocked
+url: "http://india-wris.nrsc.gov.in/wrpdata/services/waterresources"
+metadata:
+  source_agency: "Central Water Commission (CWC)"
+  license: "Public Domain"
+blocked_reason: "Requires NIC/BSNL Internal Government Network or VPN"

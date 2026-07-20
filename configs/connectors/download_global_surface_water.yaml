@@ -1,0 +1,9 @@
+name: download_global_surface_water
+type: download
+description: JRC Global Surface Water mapping layers (occurrence, change, seasonality).
+domain: hydrology
+status: file_based
+url: "https://global-surface-water.appspot.com/download/occurrence/1984_2021/14_6.tif"
+metadata:
+  source_agency: "European Commission JRC"
+  license: "CC-BY-4.0"

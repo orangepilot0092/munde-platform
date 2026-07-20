@@ -1,0 +1,13 @@
+name: idsp_disease_outbreaks_maharashtra
+type: rest
+description: Integrated Disease Surveillance Programme (IDSP) weekly outbreak reports.
+domain: health
+schedule: "0 8 * * 1"
+url: "https://idsp.nic.in/api/v1/outbreaks"
+params:
+  state_id: "27"
+  week: "current"
+metadata:
+  license: "Public Domain"
+  source_agency: "Ministry of Health & Family Welfare (IDSP)"
+  update_frequency: "Weekly"

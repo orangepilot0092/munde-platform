@@ -1,0 +1,7 @@
+name: rest_dpiit
+type: scraper
+domain: economy
+status: ready
+description: DPIIT FDI and industry data.
+url: https://dpiit.gov.in/fdi-statistics
+blocked_reason: Requires HTML scraping

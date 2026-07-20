@@ -1,0 +1,13 @@
+name: pmfby_claims_maharashtra
+type: rest
+description: Crop insurance claims and enrollment data for Maharashtra districts.
+domain: agriculture
+schedule: "0 2 * * 1"
+url: "https://pmfby.gov.in/api/v1/reports/state_claims"
+params:
+  state_code: "27"
+  year: "2023"
+metadata:
+  license: "Public Domain"
+  source_agency: "Ministry of Agriculture (PMFBY)"
+  update_frequency: "Weekly"

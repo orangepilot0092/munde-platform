@@ -1,0 +1,7 @@
+name: rest_hospital_registry
+type: rest
+domain: health
+status: ready
+description: National Health Mission hospital registry.
+url: https://hospitalregistry.nhp.gov.in/api/hospitals
+blocked_reason: Requires NHP API credentials.

@@ -1,0 +1,10 @@
+name: download_aster_gdem
+type: download
+description: ASTER Global Digital Elevation Model V003.
+domain: terrain
+status: ready
+blocked_reason: "Requires NASA Earthdata Login authentication for bulk download."
+url: "https://e4ftl01.cr.usgs.gov/ASTGTM.003/"
+metadata:
+  source_agency: "NASA / METI Japan"
+  license: "Public Domain"

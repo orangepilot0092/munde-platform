@@ -1,0 +1,7 @@
+name: rest_enam
+type: rest
+domain: agriculture
+status: ready
+description: eNAM mandi prices.
+url: https://api.enam.gov.in/api/v1/commodity-prices
+blocked_reason: Requires authenticated API token from MoA&FW.

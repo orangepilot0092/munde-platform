@@ -1,0 +1,7 @@
+name: rest_mcd_open_data
+type: rest
+domain: urban
+status: ready
+description: Municipal Corporation of Mumbai open data.
+url: https://data.mcgm.gov.in/api/v1/datasets
+blocked_reason: API gateway currently restricted to internal departments.

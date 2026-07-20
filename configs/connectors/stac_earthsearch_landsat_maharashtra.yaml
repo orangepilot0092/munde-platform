@@ -1,0 +1,12 @@
+name: stac_earthsearch_landsat_maharashtra
+type: stac
+description: Landsat 8/9 Level-2 via Element84 Earth Search.
+domain: satellite
+status: connected
+catalog_url: "https://earth-search.aws.element84.com/v1"
+collections: ["landsat-c2-l2"]
+bbox: [72.5, 15.5, 81.0, 22.5]
+datetime_range: "2023-01-01/2023-01-31"
+limit: 5
+metadata:
+  source_agency: "USGS / AWS Open Data"

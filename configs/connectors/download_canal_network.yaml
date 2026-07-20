@@ -1,0 +1,6 @@
+name: download_canal_network
+type: download
+domain: water
+status: file_based
+description: Maharashtra canal network shapefiles.
+url: https://wrd.maharashtra.gov.in/gis/canal_network.zip

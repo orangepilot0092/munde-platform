@@ -1,0 +1,10 @@
+name: hydrosheds_basins_maharashtra
+type: download
+description: HydroSHEDS river basin boundaries for Maharashtra region.
+domain: hydrology
+schedule: "0 0 1 * *"
+url: "https://data.hydrosheds.org/file/hydrosheds-v1-hybas_lev01-12_v1c.zip"
+metadata:
+  license: "HydroSHEDS Free Use License"
+  source_agency: "WWF / USGS"
+  update_frequency: "Static"

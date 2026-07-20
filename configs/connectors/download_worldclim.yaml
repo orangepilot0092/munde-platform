@@ -1,0 +1,9 @@
+name: download_worldclim
+type: download
+description: WorldClim historical climate surfaces (temperature, precipitation) at 1km resolution.
+domain: climate
+status: file_based
+url: "https://biogeo.ucdavis.edu/data/worldclim/v2.1/base/wc2.1_30s_prec.zip"
+metadata:
+  source_agency: "WorldClim"
+  license: "CC-BY-SA 4.0"

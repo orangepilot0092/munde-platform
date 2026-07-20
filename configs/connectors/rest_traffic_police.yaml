@@ -1,0 +1,7 @@
+name: rest_traffic_police
+type: rest
+domain: transport
+status: ready
+description: Traffic police congestion and incidents.
+url: https://mumbaipolice.gov.in/api/traffic-congestion
+blocked_reason: Internal network / VPN required.

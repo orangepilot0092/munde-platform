@@ -1,0 +1,6 @@
+name: download_gr_maharashtra
+type: download
+domain: governance
+status: file_based
+description: Government Resolutions (GRs) archive.
+url: https://gr.maharashtra.gov.in/Site/Download/GR_Archive.zip

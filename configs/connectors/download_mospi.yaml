@@ -1,0 +1,6 @@
+name: download_mospi
+type: download
+domain: economy
+status: file_based
+description: MOSPI statistical yearbook data.
+url: https://mospi.gov.in/sites/default/files/reports_and_publication/statistical_yearbook.csv

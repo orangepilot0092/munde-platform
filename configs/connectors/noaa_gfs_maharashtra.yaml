@@ -1,0 +1,10 @@
+name: noaa_gfs_maharashtra
+type: download
+description: NOAA Global Forecast System (GFS) 0.25 degree gridded data for Maharashtra region.
+domain: weather
+schedule: "0 */6 * * *"
+url: "https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.20231025/00/atmos/gfs.t00z.pgrb2.0p25.f000"
+metadata:
+  license: "Public Domain (US Government)"
+  source_agency: "NOAA / NCEP"
+  update_frequency: "6-Hourly"

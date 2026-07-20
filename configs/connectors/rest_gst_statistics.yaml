@@ -1,0 +1,7 @@
+name: rest_gst_statistics
+type: scraper
+domain: economy
+status: ready
+description: Monthly GST collection statistics.
+url: https://cbic.gov.in/gst-statistics
+blocked_reason: Requires HTML scraping

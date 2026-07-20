@@ -1,0 +1,11 @@
+# Global owners
+* @sahyadri-org/core-team
+
+# Documentation
+/docs/ @sahyadri-org/docs-team
+
+# Data Atlas
+/src/data_atlas/ @sahyadri-org/data-engineering
+
+# Core Platform
+/src/core/ @sahyadri-org/core-team

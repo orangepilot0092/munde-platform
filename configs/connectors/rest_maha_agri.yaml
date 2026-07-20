@@ -1,0 +1,7 @@
+name: rest_maha_agri
+type: rest
+domain: agriculture
+status: connected
+description: Maharashtra Agriculture Dept crop production stats.
+url: https://agri.maharashtra.gov.in/api/crop-production
+ssl_verify: false

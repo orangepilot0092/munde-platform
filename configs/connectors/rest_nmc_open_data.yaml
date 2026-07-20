@@ -1,0 +1,7 @@
+name: rest_nmc_open_data
+type: rest
+domain: urban
+status: ready
+description: Nashik Municipal Corporation data.
+url: https://nmcnashik.org/api/open-data
+blocked_reason: Portal exists, API access pending.

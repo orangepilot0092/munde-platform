@@ -1,0 +1,7 @@
+name: rest_eci
+type: scraper
+domain: governance
+status: ready
+description: Election Commission of India results.
+url: https://eci.gov.in/election-results/
+blocked_reason: Requires HTML scraping

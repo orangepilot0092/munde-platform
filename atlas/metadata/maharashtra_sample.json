@@ -1,0 +1,56 @@
+[
+  {
+    "dataset_id": "maha_agri_001",
+    "name": "Maharashtra District-wise Crop Production",
+    "description": "Annual crop production statistics for major crops across Maharashtra districts.",
+    "domain": "Agriculture",
+    "department": "Department of Agriculture, Maharashtra",
+    "source_url": "https://maharashtra.gov.in/agriculture",
+    "license": "Open Government License",
+    "format": "CSV",
+    "refresh_frequency": "Annual",
+    "last_updated": "2026-07-03 10:43:32.169281",
+    "quality_score": 4.5,
+    "tags": [
+      "crops",
+      "production",
+      "districts"
+    ]
+  },
+  {
+    "dataset_id": "maha_water_001",
+    "name": "Major Reservoir Levels in Maharashtra",
+    "description": "Daily water storage levels in major reservoirs across the state.",
+    "domain": "Water Resources",
+    "department": "Water Resources Department",
+    "source_url": "https://mahawater.gov.in",
+    "license": "Open Government License",
+    "format": "JSON",
+    "refresh_frequency": "Daily",
+    "last_updated": "2026-07-03 10:43:32.169305",
+    "quality_score": 4.8,
+    "tags": [
+      "water",
+      "reservoirs",
+      "levels"
+    ]
+  },
+  {
+    "dataset_id": "maha_transport_001",
+    "name": "MSRTC Bus Routes and Schedules",
+    "description": "Complete list of MSRTC bus routes, stops, and scheduled timings.",
+    "domain": "Transport",
+    "department": "MSRTC",
+    "source_url": "https://msrtc.gov.in",
+    "license": "Open Government License",
+    "format": "GTFS",
+    "refresh_frequency": "Monthly",
+    "last_updated": "2026-07-03 10:43:32.169309",
+    "quality_score": 3.9,
+    "tags": [
+      "transport",
+      "bus",
+      "routes"
+    ]
+  }
+]

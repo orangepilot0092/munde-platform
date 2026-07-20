@@ -1,0 +1,6 @@
+name: download_municipal_gis
+type: download
+domain: urban
+status: file_based
+description: Standardized ward boundaries for all Maharashtra municipal corporations.
+url: https://townplanning.maharashtra.gov.in/gis/ward_boundaries.zip

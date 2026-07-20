@@ -1,0 +1,7 @@
+name: rest_bhashini
+type: rest
+domain: language
+status: ready
+description: Bhashini translation and ASR APIs.
+url: https://dhruva-api.bhashini.gov.in/services/inference/pipeline
+blocked_reason: Requires Bhashini API key.

@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+.venv
+.env
+.pytest_cache
+.ruff_cache
+.mypy_cache
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files (Root cause of previous permission error)
+tmp*
+.tmprc_*
+*.log
+
+# Documentation (not needed in app container)
+docs/
+site/
+mkdocs.yml
+
+# Tests (not needed in production app container)
+tests/

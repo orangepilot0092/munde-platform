@@ -1,0 +1,19 @@
+name: era5_climate_maharashtra
+type: rest
+description: ECMWF ERA5 hourly reanalysis data for temperature and precipitation over Maharashtra.
+domain: climate
+schedule: "0 2 * * *"
+url: "https://cds.climate.copernicus.eu/api/v2/resources/reanalysis-era5-single-levels"
+headers:
+  api-key: "${CDS_API_KEY}"
+params:
+  product_type: "reanalysis"
+  variable: "2m_temperature,total_precipitation"
+  year: "2023"
+  month: "10"
+  day: "25"
+  format: "netcdf"
+metadata:
+  license: "Copernicus Climate Data Store License"
+  source_agency: "ECMWF / Copernicus"
+  update_frequency: "Daily"
