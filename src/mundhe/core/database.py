@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import AsyncGenerator
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql+asyncpg://sahyadri:sahyadri_dev_password@127.0.0.1:5432/sahyadri_core?ssl=disable"
+    DATABASE_URL: str = "postgresql+asyncpg://mundhe:mundhe_dev_password@127.0.0.1:5432/mundhe_core?ssl=disable"
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 settings = Settings()

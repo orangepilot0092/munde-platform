@@ -1,4 +1,4 @@
-# Project Sahyadri — Data Foundation
+# Project Mundhe — Data Foundation
 
 ## Acquired Sovereign Datasets
 The following high-value, open-source AI4Bharat datasets have been successfully downloaded and are stored locally at `/mnt/d/sahyadri-data/datasets/indic_starter/`. They are excluded from Git to preserve repository size and data sovereignty.

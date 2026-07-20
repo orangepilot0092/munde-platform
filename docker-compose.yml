@@ -1,15 +1,15 @@
 services:
   db:
     image: pgvector/pgvector:pg16
-    container_name: sahyadri-db
+    container_name: mundhe-db
     environment:
       POSTGRES_USER: sahyadri
-      POSTGRES_PASSWORD: sahyadri_dev_password
-      POSTGRES_DB: sahyadri_core
+      POSTGRES_PASSWORD: mundhe_dev_password
+      POSTGRES_DB: mundhe_core
     ports:
       - "5432:5432"
     volumes:
-      - sahyadri_db_data:/var/lib/postgresql/data
+      - mundhe_db_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U sahyadri"]
       interval: 5s
@@ -18,10 +18,10 @@ services:
 
   minio:
     image: minio/minio:latest
-    container_name: sahyadri-minio
+    container_name: mundhe-minio
     environment:
-      MINIO_ROOT_USER: sahyadri_minio
-      MINIO_ROOT_PASSWORD: sahyadri_minio_password
+      MINIO_ROOT_USER: mundhe_minio
+      MINIO_ROOT_PASSWORD: mundhe_minio_password
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -36,12 +36,12 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: sahyadri-redis
+    container_name: mundhe-redis
     ports:
       - "6379:6379"
     volumes:
-      - sahyadri_redis_data:/data
+      - mundhe_redis_data:/data
 
 volumes:
-  sahyadri_db_data:
-  sahyadri_redis_data:
+  mundhe_db_data:
+  mundhe_redis_data:
