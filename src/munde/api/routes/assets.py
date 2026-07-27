@@ -3,9 +3,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import List
 
-from mundhe.core.database import get_db
-from mundhe.core.models import IntelligenceAsset
-from mundhe.api.schemas import AssetCreate, AssetResponse
+from munde.core.database import get_db
+from munde.core.models import IntelligenceAsset
+from munde.api.schemas import AssetCreate, AssetResponse
 
 router = APIRouter(prefix="/assets", tags=["Intelligence Assets"])
 

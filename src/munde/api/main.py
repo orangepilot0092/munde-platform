@@ -3,9 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 import time
 
-from mundhe.core.logging import setup_logging, logger
-from mundhe.api.routes.assets import router as assets_router
-from mundhe.api.routes.ai import router as ai_router
+from munde.core.logging import setup_logging, logger
+from munde.api.routes.assets import router as assets_router
+from munde.api.routes.ai import router as ai_router
 
 setup_logging()
 
@@ -29,4 +29,9 @@ app.include_router(ai_router, prefix="/api/v1")
 @app.get("/health", tags=["System"])
 async def health_check():
     logger.info("health_check_requested")
-    return {"status": "healthy", "service": "mundhe-api"}
+    return {"status": "healthy", "service": "munde-api"}
+
+from munde.api.routes.search import router as search_router
+app.include_router(search_router, prefix="/api/v1")
+from munde.api.routes.agents import router as agents_router
+app.include_router(agents_router, prefix="/api/v1")

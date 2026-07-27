@@ -15,4 +15,4 @@ def setup_logging():
         cache_logger_on_first_use=True,
     )
 
-logger = structlog.get_logger("mundhe-api")
+logger = structlog.get_logger("munde-api")

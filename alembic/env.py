@@ -4,7 +4,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from mundhe.core.models import Base
+from munde.core.models import Base
 
 class Settings(BaseSettings):
     DATABASE_URL: str

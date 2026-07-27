@@ -1,33 +1,33 @@
 services:
   db:
     image: pgvector/pgvector:pg16
-    container_name: mundhe-db
+    container_name: munde-db
     environment:
-      POSTGRES_USER: sahyadri
-      POSTGRES_PASSWORD: mundhe_dev_password
-      POSTGRES_DB: mundhe_core
+      POSTGRES_USER: munde
+      POSTGRES_PASSWORD: munde_dev_password
+      POSTGRES_DB: munde_core
     ports:
       - "5432:5432"
     volumes:
-      - mundhe_db_data:/var/lib/postgresql/data
+      - munde_db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U sahyadri"]
+      test: ["CMD-SHELL", "pg_isready -U munde -d munde_core"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   minio:
     image: minio/minio:latest
-    container_name: mundhe-minio
+    container_name: munde-minio
     environment:
-      MINIO_ROOT_USER: mundhe_minio
-      MINIO_ROOT_PASSWORD: mundhe_minio_password
+      MINIO_ROOT_USER: munde_minio
+      MINIO_ROOT_PASSWORD: munde_minio_password
     ports:
       - "9000:9000"
       - "9001:9001"
     command: server /data --console-address ":9001"
     volumes:
-      - /mnt/d/sahyadri-data/minio:/data
+      - munde_minio_data:/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
       interval: 30s
@@ -36,12 +36,13 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: mundhe-redis
+    container_name: munde-redis
     ports:
       - "6379:6379"
     volumes:
-      - mundhe_redis_data:/data
+      - munde_redis_data:/data
 
 volumes:
-  mundhe_db_data:
-  mundhe_redis_data:
+  munde_db_data:
+  munde_minio_data:
+  munde_redis_data:
