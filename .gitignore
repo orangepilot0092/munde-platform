@@ -66,3 +66,26 @@ sahyadri_audit_bundle.tar.gz
 sahyadri_tree.txt
 main
 ync
+
+# Temporary files and artifacts
+*.bak
+*.tar.gz
+api_response.json
+python_modules.txt
+architecture_inventory.txt
+sahyadri_tree.txt
+sahyadri_audit_bundle.tar.gz
+
+# Local environment
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# IDE
+.vscode/
+.idea/
