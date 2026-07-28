@@ -1,37 +1,78 @@
-from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-from prometheus_fastapi_instrumentator import Instrumentator
-import time
+"""
+Project Munde — FastAPI Backend
+Single unified API endpoint for the agentic AI platform.
+"""
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import Dict, Any, Optional
+from munde.runtime.orchestrator import orchestrator
+from munde.runtime.agent_registry import registry
+import structlog
 
-from munde.core.logging import setup_logging, logger
-from munde.api.routes.assets import router as assets_router
-from munde.api.routes.ai import router as ai_router
+logger = structlog.get_logger(__name__)
 
-setup_logging()
+# Auto-load domain packs on startup
+import munde.domain_packs.sahyadri.register  # This triggers registration
 
-app = FastAPI(title="Project Sahyadri API", description="Sovereign Intelligence Platform for Maharashtra", version="0.1.0")
+app = FastAPI(
+    title="Project Munde",
+    description="Agentic AI Platform — General-purpose multi-agent orchestration",
+    version="1.0.0"
+)
 
-Instrumentator().instrument(app).expose(app, endpoint="/metrics")
+class QueryRequest(BaseModel):
+    query: str
+    user_id: Optional[str] = "anonymous"
+    context: Optional[Dict[str, Any]] = None
 
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    start_time = time.time()
-    response = await call_next(request)
-    process_time = time.time() - start_time
-    logger.info("http_request", method=request.method, path=request.url.path, status_code=response.status_code, duration_ms=round(process_time * 1000, 2))
-    return response
+class QueryResponse(BaseModel):
+    response: Dict[str, Any]
+    platform_info: Dict[str, Any]
 
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+@app.post("/api/v1/ask")
+async def ask_munde(request: QueryRequest) -> QueryResponse:
+    """
+    Unified endpoint for all queries.
+    The orchestrator routes to the appropriate agent(s).
+    """
+    logger.info("query_received", query=request.query[:100], user_id=request.user_id)
+    
+    try:
+        response = await orchestrator.process_query(request.query, request.context)
+        
+        return QueryResponse(
+            response=response.dict(),
+            platform_info={
+                "registered_agents": registry.list_agents(),
+                "available_capabilities": registry.list_capabilities(),
+            }
+        )
+    except Exception as e:
+        logger.error("query_failed", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
-app.include_router(assets_router, prefix="/api/v1")
-app.include_router(ai_router, prefix="/api/v1")
+@app.get("/api/v1/agents")
+async def list_agents():
+    """List all registered agents"""
+    agents = []
+    for name in registry.list_agents():
+        info = registry.get_agent_info(name)
+        if info:
+            agents.append(info)
+    return {"agents": agents}
 
-@app.get("/health", tags=["System"])
+@app.get("/api/v1/capabilities")
+async def list_capabilities():
+    """List all registered capabilities"""
+    return {"capabilities": registry.list_capabilities()}
+
+@app.get("/health")
 async def health_check():
-    logger.info("health_check_requested")
-    return {"status": "healthy", "service": "munde-api"}
-
-from munde.api.routes.search import router as search_router
-app.include_router(search_router, prefix="/api/v1")
-from munde.api.routes.agents import router as agents_router
-app.include_router(agents_router, prefix="/api/v1")
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "platform": "Project Munde",
+        "version": "1.0.0",
+        "loaded_domain_packs": ["sahyadri"],
+        "registered_agents_count": len(registry.list_agents())
+    }
